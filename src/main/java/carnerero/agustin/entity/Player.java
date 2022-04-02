@@ -1,11 +1,19 @@
-package carnerero.agustin.model;
+package carnerero.agustin.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.Random;
+import java.util.UUID;
+
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,35 +32,34 @@ public class Player {
 
 	@Id
 	private Long id;
-	private String name ;
+	private String name;
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date date;
 	private int winGames;
 	private int lostGames;
-	private	double average;
+	private double average;
 	private int totalGames;
-	private static int counter;
-	@DBRef(lazy = true)
-	private List<Game> games;
+	
+	
 	{
-		id=(long) counter++;		
-		name = "ANONIM";
-		date = new Date();
-		games=new ArrayList<>();
+		Random rnd=new Random();
+		id=rnd.nextLong(10000);
+		name="ANOMIN";
 	}
-	static {
-		counter=1;
-	}
+	@DBRef(lazy = true)
+	private List<Game> games;	
 	public Player(String name) {
+		
+		date = new Date();		
+		games = new ArrayList<>();
 		this.name = name;
-		
-		
+	
+
 	}
+
 	public void addGame(Game game) {
 		games.add(game);
 	}
-
-	
 
 	public void setAverage(double average) {
 		this.average = average;
@@ -66,5 +73,24 @@ public class Player {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
+	}
+
+	
 
 }

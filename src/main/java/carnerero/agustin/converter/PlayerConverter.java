@@ -1,7 +1,7 @@
 package carnerero.agustin.converter;
 
 import carnerero.agustin.dto.PlayerDTO;
-import carnerero.agustin.model.Player;
+import carnerero.agustin.entity.Player;
 
 
 public class PlayerConverter extends AbstractConverter<Player,PlayerDTO>{

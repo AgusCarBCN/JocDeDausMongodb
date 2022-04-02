@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import carnerero.agustin.entity.Game;
+import carnerero.agustin.entity.Player;
 import carnerero.agustin.exception.PlayerNotFoundException;
-import carnerero.agustin.model.Game;
-import carnerero.agustin.model.Player;
 import carnerero.agustin.repository.GameRepository;
 import carnerero.agustin.repository.PlayerRepository;
 

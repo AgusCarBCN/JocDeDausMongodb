@@ -1,16 +1,12 @@
-package carnerero.agustin.model;
+package carnerero.agustin.entity;
 
-import java.util.Date;
-import java.util.List;
+
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

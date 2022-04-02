@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import carnerero.agustin.model.Game;
-import carnerero.agustin.model.Player;
+import carnerero.agustin.entity.Game;
+import carnerero.agustin.entity.Player;
 
 
 @Repository

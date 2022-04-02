@@ -15,8 +15,8 @@ import carnerero.agustin.converter.GameConverter;
 import carnerero.agustin.converter.PlayerConverter;
 import carnerero.agustin.dto.GameDTO;
 import carnerero.agustin.dto.PlayerDTO;
-import carnerero.agustin.model.Game;
-import carnerero.agustin.model.Player;
+import carnerero.agustin.entity.Game;
+import carnerero.agustin.entity.Player;
 import carnerero.agustin.service.JocDeDausService;
 
 @RestController

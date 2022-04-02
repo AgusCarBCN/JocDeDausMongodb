@@ -1,7 +1,7 @@
 package carnerero.agustin.converter;
 
 import carnerero.agustin.dto.GameDTO;
-import carnerero.agustin.model.Game;
+import carnerero.agustin.entity.Game;
 
 
 public class GameConverter extends AbstractConverter<Game, GameDTO> {
