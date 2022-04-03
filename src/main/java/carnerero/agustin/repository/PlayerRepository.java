@@ -6,9 +6,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import carnerero.agustin.entity.Player;
 
 public interface PlayerRepository extends MongoRepository<Player,Long>{
-
 	
-	
+	public Player findByName(String name);
 
 	
 

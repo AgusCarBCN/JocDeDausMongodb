@@ -1,4 +1,4 @@
-package carnerero.agustin;
+package carnerero.agustin.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

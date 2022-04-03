@@ -17,7 +17,7 @@ public class JocDeDausService {
 	private PlayerRepository playerRepo;
 	@Autowired
 	private GameRepository gameRepo;
-
+ 
 	// Crea un jugador
 	public Player createPlayer(Player player) {
 		Player newPlayer = playerRepo.save(player);
