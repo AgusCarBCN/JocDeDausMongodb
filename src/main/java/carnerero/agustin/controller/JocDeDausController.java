@@ -39,7 +39,7 @@ public class JocDeDausController {
 	}
 
 	// Crear jugador
-	//@PreAuthorize("hasRole('ADMIN')")
+
 	
 	@PostMapping("/players")
 	public ResponseEntity<PlayerDTO> createPayer(@RequestBody Player player) {
@@ -49,7 +49,7 @@ public class JocDeDausController {
 	}
 
 	// Modifica el nombre del jugador
-	//@PreAuthorize("hasRole('ADMIN')")
+	
 	@PutMapping("/players")
 	public ResponseEntity<PlayerDTO> modifyPlayerName(@RequestBody PlayerDTO player) {
 		Player updatedPlayer = service.updatePlayerName(playerConverter.fromDTO(player));
@@ -59,7 +59,7 @@ public class JocDeDausController {
 	}
 
 	// Un jugador realiza una tirada de dados
-	//@PreAuthorize("hasRole('USER')")
+	
 	@PostMapping("/players/{id}/games")
 	public ResponseEntity<GameDTO> newGame(@PathVariable(value = "id") Long idPlayer) {
 		try {
@@ -74,7 +74,7 @@ public class JocDeDausController {
 	}
 
 	// Elimina las jugadas del jugador
-	//@PreAuthorize("hasRole('ADMIN')")
+	
 	@DeleteMapping("/players/{id}/games")
 	public ResponseEntity<List<GameDTO>> deleteGamesByPlayer(@PathVariable Long id) {
 		List<GameDTO>gamesdto=gameConverter.fromEntity(service.deleteGamesByPlayer(id));
