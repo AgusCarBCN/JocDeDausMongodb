@@ -12,17 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import carnerero.agustin.entity.Game;
 import carnerero.agustin.entity.Player;
-import carnerero.agustin.service.JocDeDausService;
-
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)
 class JocDeDausMongodbApplicationTests {
 
-	
 	@Autowired
 	JocDeDausService service;
-	private Long id=6837L;
+
 	@Test
 	@Order(1)
 	public void createPlayerTest() {
@@ -41,6 +38,8 @@ class JocDeDausMongodbApplicationTests {
 	@Test
 	@Order(3)
 	public void getOnePlayer() {
+		List<Player> players = service.getPlayers();
+		long id = players.get(0).getId();
 		Player player = service.getPlayer(id);
 		assertNotNull(player);
 	}
@@ -48,6 +47,8 @@ class JocDeDausMongodbApplicationTests {
 	@Test
 	@Order(4)
 	public void createGame() {
+		List<Player> players = service.getPlayers();
+		long id = players.get(0).getId();
 		Game newGame = new Game();
 		service.createGame(id, newGame);
 		assertNotNull(newGame);
@@ -56,7 +57,8 @@ class JocDeDausMongodbApplicationTests {
 	@Test
 	@Order(5)
 	public void upDatePlayerName() {
-		Player player = service.getPlayer(id);
+		List<Player> players = service.getPlayers();
+		Player player = players.get(0);
 		String nameBefore = player.getName();
 		player.setName("nuevoNombre");
 		service.updatePlayerName(player);
@@ -66,6 +68,8 @@ class JocDeDausMongodbApplicationTests {
 	@Test
 	@Order(6)
 	public void getGamesByPlayer() {
+		List<Player> players = service.getPlayers();
+		long id = players.get(0).getId();
 		List<Game> games = service.getGamesByPlayer(id);
 		assertThat(games).size().isGreaterThan(0);
 	}
@@ -73,9 +77,11 @@ class JocDeDausMongodbApplicationTests {
 	@Test
 	@Order(7)
 	public void deleteGamesByPlayer() {
+		List<Player> players = service.getPlayers();
+		long id = players.get(0).getId();
 		List<Game> games = service.getGamesByPlayer(id);
 		service.deleteGamesByPlayer(id);
-		games=service.getGamesByPlayer(id);
+		games = service.getGamesByPlayer(id);
 		assertThat(games).size().isEqualTo(0);
 	}
 
@@ -89,15 +95,15 @@ class JocDeDausMongodbApplicationTests {
 	@Test
 	@Order(9)
 	public void getTheBestPlayer() {
-		Player player = service.theBestPlayer();
-		assertNotNull(player);
-	} 
+		List<Player> players = service.theBestPlayer();
+		assertNotNull(players);
+	}
 
 	@Test
 	@Order(10)
 	public void getTheWorstPlayer() {
-		Player player = service.theWorstPlayer();
-		assertNotNull(player);
+		List<Player> players = service.theWorstPlayer();
+		assertNotNull(players);
 	}
 
 }

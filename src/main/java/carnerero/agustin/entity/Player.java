@@ -5,21 +5,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-import java.util.UUID;
-
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import org.springframework.data.annotation.Id;
 
 @NoArgsConstructor
@@ -39,21 +32,20 @@ public class Player {
 	private int lostGames;
 	private double average;
 	private int totalGames;
-	
-	
+
 	{
-		Random rnd=new Random();
-		id=rnd.nextLong(10000);
-		name="ANOMIN";
+		Random rnd = new Random();
+		id = rnd.nextLong(10000);
+		name = "ANONYMOUS";
 	}
 	@DBRef(lazy = true)
-	private List<Game> games;	
+	private List<Game> games;
+
 	public Player(String name) {
-		
-		date = new Date();		
+
+		date = new Date();
 		games = new ArrayList<>();
 		this.name = name;
-	
 
 	}
 
@@ -90,7 +82,5 @@ public class Player {
 		Player other = (Player) obj;
 		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
-
-	
 
 }

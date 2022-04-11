@@ -1,5 +1,6 @@
 package carnerero.agustin.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class JocDeDausService {
 	private PlayerRepository playerRepo;
 	@Autowired
 	private GameRepository gameRepo;
- 
+
 	// Crea un jugador
 	public Player createPlayer(Player player) {
 		Player newPlayer = playerRepo.save(player);
@@ -68,17 +69,18 @@ public class JocDeDausService {
 		game.setPlayer(player);
 		game.setDice1((int) (Math.random() * 6 + 1));
 		game.setDice2((int) (Math.random() * 6 + 1));
+		game.setResult(game.getDice1() + game.getDice2());
 		if (game.getDice1() + game.getDice2() == 7) {
 			game.setWinner(true);
-			winGames=player.getWinGames()+1;
+			winGames = player.getWinGames() + 1;
 			player.setWinGames(winGames);
 		} else {
-			lostGames=player.getLostGames()+1;
+			lostGames = player.getLostGames() + 1;
 			player.setLostGames(lostGames);
 		}
-		totalGames=player.getTotalGames()+1;
+		totalGames = player.getTotalGames() + 1;
 		player.setTotalGames(totalGames);
-		average = ((double)player.getWinGames() /(double) player.getTotalGames()) * 100;
+		average = ((double) player.getWinGames() / (double) player.getTotalGames()) * 100;
 		player.setAverage(average);
 		playerRepo.save(player);
 		gameRepo.save(game);
@@ -106,10 +108,13 @@ public class JocDeDausService {
 		return averageSum / playersNum;
 	}
 
-	// Retorna el mejor jugador
-	public Player theBestPlayer() {
+	// Retorna el mejor jugador o los mejores jugadores del sistema si hay un
+	// empate.Por eso devuelvo una lista.
+	public List<Player> theBestPlayer() {
 		List<Player> players = getPlayers();
+		List<Player> playersb = new ArrayList<>();
 		Player theBest = null;
+		playersb.removeAll(playersb);
 		double hightAverage = 0.0;
 		for (Player player : players) {
 			if (player.getAverage() > hightAverage) {
@@ -117,12 +122,22 @@ public class JocDeDausService {
 				theBest = player;
 			}
 		}
-		return theBest;
+		for (Player p : players) {
+			if (p.getAverage() == theBest.getAverage()) {
+				playersb.add(p);
+			}
+		}
+
+		return playersb;
+
 	}
 
-	// Retorna el peor jugador
-	public Player theWorstPlayer() {
+	// Retorna el peor jugador o los peores jugadores del sistema si hay un
+	// empate.Por eso devuelvo una lista.
+	public List<Player> theWorstPlayer() {
 		List<Player> players = getPlayers();
+		List<Player> playersw = new ArrayList<>();
+		playersw.removeAll(playersw);
 		Player theWorst = null;
 		double LowAverage = 100.0;
 		for (Player player : players) {
@@ -131,7 +146,12 @@ public class JocDeDausService {
 				theWorst = player;
 			}
 		}
-		return theWorst;
-	}
+		for (Player p : players) {
+			if (p.getAverage() == theWorst.getAverage()) {
+				playersw.add(p);
+			}
+		}
 
+		return playersw;
+	}
 }
