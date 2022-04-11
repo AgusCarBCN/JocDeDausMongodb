@@ -112,18 +112,17 @@ public class JocDeDausService {
 	// empate.Por eso devuelvo una lista.
 	public List<Player> theBestPlayer() {
 		List<Player> players = getPlayers();
-		List<Player> playersb = new ArrayList<>();
-		Player theBest = null;
+		List<Player> playersb = new ArrayList<>();		
 		playersb.removeAll(playersb);
 		double hightAverage = 0.0;
 		for (Player player : players) {
 			if (player.getAverage() > hightAverage) {
 				hightAverage = player.getAverage();
-				theBest = player;
+				
 			}
 		}
 		for (Player p : players) {
-			if (p.getAverage() == theBest.getAverage()) {
+			if (p.getAverage() == hightAverage) {
 				playersb.add(p);
 			}
 		}
@@ -137,17 +136,16 @@ public class JocDeDausService {
 	public List<Player> theWorstPlayer() {
 		List<Player> players = getPlayers();
 		List<Player> playersw = new ArrayList<>();
-		playersw.removeAll(playersw);
-		Player theWorst = null;
+		playersw.removeAll(playersw);		
 		double LowAverage = 100.0;
 		for (Player player : players) {
 			if (player.getAverage() < LowAverage) {
 				LowAverage = player.getAverage();
-				theWorst = player;
+				
 			}
 		}
 		for (Player p : players) {
-			if (p.getAverage() == theWorst.getAverage()) {
+			if (p.getAverage() == LowAverage) {
 				playersw.add(p);
 			}
 		}
