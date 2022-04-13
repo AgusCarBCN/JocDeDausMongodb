@@ -81,7 +81,7 @@ public class JocDeDausService {
 		totalGames = player.getTotalGames() + 1;
 		player.setTotalGames(totalGames);
 		average = ((double) player.getWinGames() / (double) player.getTotalGames()) * 100;
-		average=Math.round(average*100.0)/100.0;
+		average = Math.round(average * 100.0) / 100.0;
 		player.setAverage(average);
 		playerRepo.save(player);
 		gameRepo.save(game);
@@ -113,12 +113,15 @@ public class JocDeDausService {
 	// empate.Por eso devuelvo una lista.
 	public List<Player> theBestPlayer() {
 		List<Player> players = getPlayers();
-		List<Player> playersb = new ArrayList<>();		
+
+		List<Player> playersb = new ArrayList<>();
+
 		playersb.removeAll(playersb);
 		double hightAverage = 0.0;
 		for (Player player : players) {
 			if (player.getAverage() > hightAverage) {
 				hightAverage = player.getAverage();
+
 			}
 		}
 		for (Player p : players) {
@@ -136,11 +139,13 @@ public class JocDeDausService {
 	public List<Player> theWorstPlayer() {
 		List<Player> players = getPlayers();
 		List<Player> playersw = new ArrayList<>();
-		playersw.removeAll(playersw);		
+		playersw.removeAll(playersw);
 		double LowAverage = 100.0;
 		for (Player player : players) {
 			if (player.getAverage() < LowAverage) {
-				LowAverage = player.getAverage();				
+
+				LowAverage = player.getAverage();
+
 			}
 		}
 		for (Player p : players) {

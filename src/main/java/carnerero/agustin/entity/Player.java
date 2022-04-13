@@ -27,8 +27,10 @@ public class Player {
 	@Id
 	private Long id;
 	private String name;
-	@JsonFormat(pattern = "dd/MM/yyyy")	
-	private Date date;
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private Date dateReg;
+
 	private int winGames;
 	private int lostGames;
 	private double average;
@@ -44,7 +46,7 @@ public class Player {
 
 	public Player(String name) {
 
-		date = new Date();
+		dateReg = new Date();
 		games = new ArrayList<>();
 		this.name = name;
 
